@@ -1,7 +1,7 @@
 ## Student Attendance Project
 
 
-Based on Murtaza's workshop attendance project with workable app using flask
+Based on Murtaza's workshop attendance project with workable html page using flask
 
 step 1:
 open terminal
