@@ -5,14 +5,14 @@ import face
 import pandas as pd
 import shutil
 
-# def create_folder(path):
-#     if os.path.exists(path):
-#         shutil.rmtree(path)
-#     os.makedirs(path)
+def create_folder(path):
+    if os.path.exists(path):
+        shutil.rmtree(path)
+    os.makedirs(path)
 
-# create_folder('uploads')
+create_folder('uploads')
 
-# attendance_path = os.path.join('artifacts','attendance.csv')
+attendance_path = os.path.join('artifacts','attendance.csv')
 
 application = Flask(__name__)
 app = application
