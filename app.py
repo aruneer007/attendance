@@ -14,7 +14,8 @@ create_folder('uploads')
 
 attendance_path = os.path.join('artifacts','attendance.csv')
 
-app = Flask(__name__)
+application = Flask(__name__)
+app = application
 
 @app.route('/',methods=['GET'])
 def index():
@@ -54,4 +55,4 @@ def details():
 
 
 if __name__ == '__main__':
-    app.run(debug=True, host='0.0.0.0', port=5000)
+    app.run(host='0.0.0.0')
