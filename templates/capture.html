@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Webcam Capture</title>
+  </head>
+  <body>
+    <h1>Webcam Capture</h1>
+    <div>
+      <video id="video" width="480" height="640" autoplay></video>
+    </div>
+    <div>
+      <button id="capture-button">Capture Image</button>
+    </div>
+    
+    <div>
+      <form id="image-form" action="/upload" method="POST">
+        <label for="image-name">Image Name:</label>
+        <input type="text" id="image-name" name="image-name">
+        <input type="hidden" id="image-data" name="image-data">
+        <button type="submit">Upload Image</button>
+      </form>
+    </div>
+    <div>
+      <button onclick="window.location.href='/'">Home</button>
+    </div>
+    <script>
+      const video = document.getElementById("video");
+      const captureButton = document.getElementById("capture-button");
+      const imageForm = document.getElementById("image-form");
+      const imageNameInput = document.getElementById("image-name");
+      const imageDataInput = document.getElementById("image-data");
+      const constraints = { video: true };
+
+      function handleSuccess(stream) {
+        video.srcObject = stream;
+      }
+
+      function handleError(error) {
+        console.error("Error accessing webcam:", error);
+      }
+
+      captureButton.addEventListener("click", function() {
+        const canvas = document.createElement("canvas");
+        canvas.width = video.videoWidth;
+        canvas.height = video.videoHeight;
+        canvas.getContext("2d").drawImage(video, 0, 0);
+        const dataURL = canvas.toDataURL();
+        imageDataInput.value = dataURL;
+      });
+
+      imageForm.addEventListener("submit", function(event) {
+        event.preventDefault();
+        const imageName = imageNameInput.value;
+        const imageData = imageDataInput.value;
+        fetch("/upload", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({ name: imageName, data: imageData })
+        }).then(function(response) {
+          console.log("Image upload response:", response);
+        });
+      });
+
+      navigator.mediaDevices.getUserMedia(constraints)
+        .then(handleSuccess)
+        .catch(handleError);
+    </script>
+  </body>
+</html>

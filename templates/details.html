@@ -1,0 +1,26 @@
+<html>
+<body>
+       <form action="{{ url_for('details')}}" method="post">
+        <h1>
+            <legend>Student Attendance</legend>
+        </h1>
+        
+        </form>
+
+        {% for k,v in results %}
+        <h2>
+        
+            {{k,v}}
+            
+         </h2>
+        {% endfor %}
+    
+    <h2>
+        Total attendees {{results2}}
+        
+     </h2>
+     <div>
+        <button onclick="window.location.href='/'">Home</button>
+      </div>
+   <body>
+</html>
