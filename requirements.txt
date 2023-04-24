@@ -1,0 +1,8 @@
+numpy
+pandas
+cmake
+flask
+opencv-python==4.5.4.60
+dlib==19.24.0
+face-recognition
+-e .
